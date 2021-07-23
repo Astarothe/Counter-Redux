@@ -11,6 +11,8 @@ import {
     rangeValuesType
 } from "../../state/clicker-reducer";
 import {StoreType} from "../../state/store";
+import {Grid} from "@material-ui/core";
+import s from "./Clicker.module.css"
 
 type all = rangeValuesType | any
 
@@ -50,15 +52,18 @@ export function Clicker() {
     }
 
     return (
-        <div>
-            <div>
-                <TableSettings onChange={onChange} rangeValues={rangeValues} error={errors} changeMode={changeMode}/>
-            </div>
-            <div>
-                <TableClicker onChange={onChange} currentValue={currentValue} changeMode={changeMode}
-                              minValue={rangeValues[minValueId].value} maxValue={rangeValues[maxValueId].value}/>
-            </div>
-        </div>
+        <Grid container  className={s.containerClicker}>
+            <Grid container justifyContent="space-evenly" className={s.containerBlock}>
+                <Grid item xs={5} className={s.gridItem}>
+                    <TableSettings onChange={onChange} rangeValues={rangeValues} error={errors}
+                                   changeMode={changeMode}/>
+                </Grid>
+                <Grid item xs={5} className={s.gridItem}>
+                    <TableClicker onChange={onChange} currentValue={currentValue} changeMode={changeMode}
+                                  minValue={rangeValues[minValueId].value} maxValue={rangeValues[maxValueId].value}/>
+                </Grid>
+            </Grid>
+        </Grid>
     );
 }
 

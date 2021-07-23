@@ -21,7 +21,7 @@ export const Input: React.FC<InputType> = ({onChange, value, id, error}) => {
         <div>
             <TextField variant="outlined" id="standard-number" label="Number"
                        type="number" InputLabelProps={{shrink: true,}}
-                       value={value} onChange={onChangeHandler}/>
+                       value={value} onChange={onChangeHandler} error={error}/>
         </div>
     );
 }

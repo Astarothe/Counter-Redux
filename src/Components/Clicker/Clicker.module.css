@@ -1,0 +1,16 @@
+.containerClicker {
+    max-width: 600px;
+    margin: 0 auto;
+    height: 100vh;
+    align-content: center;
+}
+.containerBlock{
+    height: 50vh;
+    background: bisque;
+    align-content: center;
+    border-radius: 10px;
+    text-align: center;
+}
+.gridItem{
+    height: 100%;
+}

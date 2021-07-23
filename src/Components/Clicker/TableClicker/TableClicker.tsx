@@ -3,6 +3,7 @@ import {changeCurrentValueAC} from "../../../state/clicker-reducer";
 import {Button} from "@material-ui/core";
 import PlusOneIcon from '@material-ui/icons/PlusOne';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import s from "./TableClicker.module.css"
 
 type TableClickerType = {
     onChange: (value: any) => void
@@ -22,12 +23,11 @@ export const TableClicker: React.FC<TableClickerType> = ({currentValue, onChange
         onChange(changeCurrentValueAC(minValue))
     }
     return (
-        <div>
-            <div>
+        <div className={s.containerTableClicker}>
+            <div className={s.containerCurrentValue}>
                 {!changeMode ? currentValue : "chaining"}
             </div>
             <div>
-
                 <Button variant={"contained"} color={"primary"}
                         disabled={changeMode || maxValue === currentValue} onClick={onClickIncrement}>
                     <PlusOneIcon/>

@@ -8,8 +8,8 @@ import {
 } from "../../../state/clicker-reducer";
 import {Input} from "./Input/Input";
 import {Button} from "@material-ui/core";
-import SaveIcon from '@material-ui/icons/Save';
 import SettingsIcon from '@material-ui/icons/Settings';
+import s from "./TableSettings.module.css"
 
 type TableSettingsType = {
     rangeValues: rangeValuesType
@@ -29,15 +29,15 @@ export const TableSettings: React.FC<TableSettingsType> = ({rangeValues, onChang
     })
 
     return (
-        <div>
-            <div>
+        <div className={s.containerTableSettings}>
+            <div className={s.containerInputs}>
                 {inputAll}
             </div>
             <div>
                 <Button variant={"contained"} color={"primary"} disabled={!changeMode || error}
                         onClick={onChangeMode}>
                     set
-                    <SettingsIcon />
+                    <SettingsIcon/>
                 </Button>
             </div>
         </div>
