@@ -8,9 +8,10 @@ type InputType = {
     value: number
     id: string
     error: boolean
+    text: string
 }
 
-export const Input: React.FC<InputType> = ({onChange, value, id, error}) => {
+export const Input: React.FC<InputType> = ({onChange, value, id, error,text}) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.currentTarget.valueAsNumber, id)
@@ -19,7 +20,7 @@ export const Input: React.FC<InputType> = ({onChange, value, id, error}) => {
 
     return (
         <div>
-            <TextField variant="outlined" id="standard-number" label="Number"
+            <TextField variant="outlined" id="standard-number" label={text}
                        type="number" InputLabelProps={{shrink: true,}}
                        value={value} onChange={onChangeHandler} error={error}/>
         </div>

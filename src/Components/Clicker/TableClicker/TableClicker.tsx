@@ -11,9 +11,10 @@ type TableClickerType = {
     changeMode: boolean
     maxValue: number
     minValue: number
+    error: boolean
 }
 
-export const TableClicker: React.FC<TableClickerType> = ({currentValue, onChange, changeMode, maxValue, minValue}) => {
+export const TableClicker: React.FC<TableClickerType> = ({error, currentValue, onChange, changeMode, maxValue, minValue}) => {
     const onClickIncrement = () => {
         if (maxValue >= currentValue + 1) {
             onChange(changeCurrentValueAC(currentValue + 1))
@@ -25,9 +26,9 @@ export const TableClicker: React.FC<TableClickerType> = ({currentValue, onChange
     return (
         <div className={s.containerTableClicker}>
             <div className={s.containerCurrentValue}>
-                {!changeMode ? currentValue : "chaining"}
+                <p className={s.currentValue}>{!changeMode ? currentValue : error ? "incorrect value" :"chaining"}</p>
             </div>
-            <div>
+            <div className={s.containerButtons}>
                 <Button variant={"contained"} color={"primary"}
                         disabled={changeMode || maxValue === currentValue} onClick={onClickIncrement}>
                     <PlusOneIcon/>

@@ -10,4 +10,14 @@
     flex-direction: column;
     height: 50%;
     justify-content: space-around;
+    background: white;
+    border-radius: 10px;
+}
+.currentValue{
+    font-family: sans-serif;
+    font-size: 40px;
+}
+.containerButtons{
+    display: flex;
+    justify-content: space-evenly;
 }

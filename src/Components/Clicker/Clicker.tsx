@@ -60,7 +60,7 @@ export function Clicker() {
                 </Grid>
                 <Grid item xs={5} className={s.gridItem}>
                     <TableClicker onChange={onChange} currentValue={currentValue} changeMode={changeMode}
-                                  minValue={rangeValues[minValueId].value} maxValue={rangeValues[maxValueId].value}/>
+                                  minValue={rangeValues[minValueId].value} maxValue={rangeValues[maxValueId].value} error={errors}/>
                 </Grid>
             </Grid>
         </Grid>

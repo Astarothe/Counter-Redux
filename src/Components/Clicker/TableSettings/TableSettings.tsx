@@ -25,7 +25,7 @@ export const TableSettings: React.FC<TableSettingsType> = ({rangeValues, onChang
     const onChangeMode = () => onChange(changeModeValueAC(false))
 
     const inputAll = [rangeValues[maxValueId], rangeValues[minValueId]].map((i, index) => {
-        return <Input key={index} id={i.id} value={i.value} onChange={onChangeCallback} error={error}/>
+        return <Input key={index} id={i.id} value={i.value} text={i.text} onChange={onChangeCallback} error={error}/>
     })
 
     return (

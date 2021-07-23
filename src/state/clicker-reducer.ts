@@ -10,6 +10,7 @@ export const maxValueId = v1();
 export type rangeValueType = {
     id: string
     value: number
+    text: string
 }
 export type rangeValuesType = {
     [key: string]: rangeValueType,
@@ -49,10 +50,12 @@ const initialState = {
         [minValueId]: {
             id: minValueId,
             value: 0,
+            text: "Min Value"
         },
         [maxValueId]: {
             id: maxValueId,
             value: 1,
+            text: "Max value"
         },
     },
     currentValue: 0,
