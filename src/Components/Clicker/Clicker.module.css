@@ -1,16 +1,29 @@
 .containerClicker {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
     height: 100vh;
     align-content: center;
 }
 .containerBlock{
     height: 50vh;
-    background: bisque;
+    background: linear-gradient(45deg, tan, snow);
     align-content: center;
     border-radius: 10px;
     text-align: center;
 }
 .gridItem{
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .containerBlock{
+        height: 100vh;
+        border-radius: 0px;
+    }
+    .gridItem{
+        height: 50%;
+    }
 }

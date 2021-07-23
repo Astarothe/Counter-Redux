@@ -20,8 +20,9 @@ type TableSettingsType = {
 
 export const TableSettings: React.FC<TableSettingsType> = ({rangeValues, onChange, error, changeMode}) => {
     const onChangeCallback = (value: number, id: string) => {
-        onChange(changeRangeValueAC(value, id, true))
+       !isNaN(value) && onChange(changeRangeValueAC(value, id, true))
     }
+
     const onChangeMode = () => onChange(changeModeValueAC(false))
 
     const inputAll = [rangeValues[maxValueId], rangeValues[minValueId]].map((i, index) => {

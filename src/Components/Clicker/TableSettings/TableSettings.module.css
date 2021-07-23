@@ -1,9 +1,9 @@
 .containerTableSettings {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 80%;
     justify-content: space-evenly;
-    background: thistle;
+    border-radius: 7px;
 }
 
 .containerInputs {

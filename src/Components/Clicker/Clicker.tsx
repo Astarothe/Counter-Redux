@@ -3,12 +3,8 @@ import {TableSettings} from "./TableSettings/TableSettings";
 import {TableClicker} from "./TableClicker/TableClicker";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    ActionsType,
-    changeCurrentValueAC, changeModeValueAC,
-    changeRangeValueAC,
-    maxValueId,
-    minValueId,
-    rangeValuesType
+    ActionsType, changeCurrentValueAC, changeModeValueAC, changeRangeValueAC,
+    maxValueId, minValueId, rangeValuesType
 } from "../../state/clicker-reducer";
 import {StoreType} from "../../state/store";
 import {Grid} from "@material-ui/core";
@@ -52,15 +48,16 @@ export function Clicker() {
     }
 
     return (
-        <Grid container  className={s.containerClicker}>
+        <Grid container className={s.containerClicker}>
             <Grid container justifyContent="space-evenly" className={s.containerBlock}>
-                <Grid item xs={5} className={s.gridItem}>
+                <Grid item xs={8} sm={5} className={s.gridItem}>
                     <TableSettings onChange={onChange} rangeValues={rangeValues} error={errors}
                                    changeMode={changeMode}/>
                 </Grid>
-                <Grid item xs={5} className={s.gridItem}>
+                <Grid item xs={8} sm={5} className={s.gridItem}>
                     <TableClicker onChange={onChange} currentValue={currentValue} changeMode={changeMode}
-                                  minValue={rangeValues[minValueId].value} maxValue={rangeValues[maxValueId].value} error={errors}/>
+                                  minValue={rangeValues[minValueId].value} maxValue={rangeValues[maxValueId].value}
+                                  error={errors}/>
                 </Grid>
             </Grid>
         </Grid>
