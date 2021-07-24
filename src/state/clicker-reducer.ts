@@ -15,17 +15,16 @@ export type rangeValueType = {
 export type rangeValuesType = {
     [key: string]: rangeValueType,
 }
-export type initialStateType = {
+export type initStateType = {
     rangeValues: rangeValuesType,
     currentValue: number
-    changeMode: boolean
+    mode: boolean
 }
 
 type changeRangeValueACType = {
     type: "CHANGE_RANGE_VALUE"
     value: number
     id: string
-    mode: boolean
 }
 type changeCurrentValueACType = {
     type: "CHANGE_CURRENT_VALUE"
@@ -41,7 +40,7 @@ export type ActionsType =
     | ReturnType<typeof changeCurrentValueAC>
     | ReturnType<typeof changeModeValueAC>
 
-const initialState = {
+const initState = {
     rangeValues: {
         [minValueId]: {
             id: minValueId,
@@ -51,15 +50,14 @@ const initialState = {
         [maxValueId]: {
             id: maxValueId,
             value: 1,
-            text: "Max value"
+            text: "Max Value"
         },
     },
     currentValue: 0,
-    changeMode: false
+    mode: false
 }
 
-export const clickerReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
-
+export const clickerReducer = (state: initStateType = initState, action: ActionsType): initStateType => {
     switch (action.type) {
         case CHANGE_RANGE_VALUE:
             return {
@@ -68,7 +66,6 @@ export const clickerReducer = (state: initialStateType = initialState, action: A
                     ...state.rangeValues, [action.id]:
                         {...state.rangeValues[action.id], value: action.value}
                 },
-                changeMode: action.mode
             }
         case CHANGE_CURRENT_VALUE:
             return {
@@ -78,7 +75,7 @@ export const clickerReducer = (state: initialStateType = initialState, action: A
         case CHANGE_MODE:
             return {
                 ...state,
-                changeMode: action.mode,
+                mode: action.mode,
                 currentValue: state.rangeValues[minValueId].value
             }
         default:
@@ -86,7 +83,7 @@ export const clickerReducer = (state: initialStateType = initialState, action: A
     }
 }
 
-export const changeRangeValueAC = (value: number, id: string, mode: boolean): changeRangeValueACType =>
-    ({type: CHANGE_RANGE_VALUE, value, id, mode})
+export const changeRangeValueAC = (value: number, id: string): changeRangeValueACType =>
+    ({type: CHANGE_RANGE_VALUE, value, id})
 export const changeCurrentValueAC = (value: number): changeCurrentValueACType => ({type: CHANGE_CURRENT_VALUE, value})
 export const changeModeValueAC = (mode: boolean): changeModeValueACType => ({type: CHANGE_MODE, mode})

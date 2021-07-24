@@ -21,22 +21,25 @@ export const TableSettings: React.FC<TableSettingsType> = React.memo(
         const disabledButton = !changeMode || error
 
         const onChangeCallback = useCallback((value: number, id: string) => {
-            !isNaN(value) && onChange(changeRangeValueAC(value, id, true))
+            !isNaN(value) && onChange(changeRangeValueAC(value, id))
+            onChange(changeModeValueAC(true))
         }, [onChange])
 
         const onChangeMode = useCallback(() => onChange(changeModeValueAC(false)), [onChange])
 
-        const inputAll = [rangeValues[maxValueId], rangeValues[minValueId]].map(input => (
+        const inputs = [rangeValues[maxValueId], rangeValues[minValueId]].map(input => (
             <Input key={input.id} onChange={onChangeCallback} error={error} {...input}/>
         ))
 
         return (
-            <div className={s.containerTableSettings}>
-                <div className={s.containerInputs}>
-                    {inputAll}
+            <div className={s.container}>
+                <div className={s.wrapperInputs}>
+                    {inputs}
                 </div>
                 <div>
-                    <Button variant={"contained"} color={"primary"} disabled={disabledButton}
+                    <Button variant={"contained"}
+                            color={"primary"}
+                            disabled={disabledButton}
                             onClick={onChangeMode}>set
                         <SettingsIcon/>
                     </Button>

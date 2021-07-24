@@ -1,10 +1,10 @@
-.containerClicker {
+.container {
     max-width: 700px;
     margin: 0 auto;
     height: 100vh;
     align-content: center;
 }
-.containerBlock{
+.wrapperItem{
     height: 50vh;
     background: linear-gradient(45deg, tan, snow);
     align-content: center;
@@ -12,7 +12,7 @@
     text-align: center;
     justify-content: space-evenly;
 }
-.gridItem{
+.item{
     height: 100%;
     display: flex;
     flex-direction: column;

@@ -2,10 +2,10 @@ import {
     changeCurrentValueAC,
     changeRangeValueAC,
     clickerReducer,
-    initialStateType, maxValueId, minValueId
+    initStateType, maxValueId, minValueId
 } from "./clicker-reducer";
 
-let startState: initialStateType;
+let startState: initStateType;
 beforeEach(() => {
     startState = {
         rangeValues: {
@@ -19,7 +19,7 @@ beforeEach(() => {
             }
         },
         currentValue: 0,
-        changeMode: false
+        mode: false
     }
 })
 
@@ -29,7 +29,7 @@ test("correct max value should be changed", () => {
     expect(endState.rangeValues.minValue.value).toBe(0)
     expect(endState.rangeValues.maxValue.value).toBe(5)
     expect(endState.currentValue).toBe(0)
-    expect(endState.changeMode).toBe(true)
+    expect(endState.mode).toBe(true)
 
 })
 
@@ -39,7 +39,7 @@ test("correct min value should be changed", () => {
     expect(endState.rangeValues.minValue.value).toBe(3)
     expect(endState.rangeValues.maxValue.value).toBe(4)
     expect(endState.currentValue).toBe(0)
-    expect(endState.changeMode).toBe(true)
+    expect(endState.mode).toBe(true)
 })
 
 test("correct current value should be changed", () => {
