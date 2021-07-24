@@ -3,45 +3,43 @@ import {TableSettings} from "./TableSettings/TableSettings";
 import {TableClicker} from "./TableClicker/TableClicker";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    ActionsType, changeCurrentValueAC, changeModeValueAC, changeRangeValueAC,
-    maxValueId, minValueId, rangeValuesType
+    ActionsType, changeCurrentValueAC, changeModeValueAC, changeRangeValueAC, initialStateType,
+    maxValueId, minValueId
 } from "../../state/clicker-reducer";
 import {StoreType} from "../../state/store";
 import {Grid} from "@material-ui/core";
 import s from "./Clicker.module.css"
 
-type all = rangeValuesType | any
 
 export function Clicker() {
     const dispatch = useDispatch()
-    const [rangeValues, currentValue, changeMode] = useSelector<StoreType, Array<all>>(state => {
-        return [state.clicker.rangeValues, state.clicker.currentValue, state.clicker.changeMode]
-    })
+    const {rangeValues, currentValue, changeMode} = useSelector<StoreType, initialStateType>
+    (state => ({...state.clicker}))
+
+    let minValue = rangeValues[minValueId].value
+    let maxValue = rangeValues[maxValueId].value
     let errors = false
-    if (rangeValues[minValueId].value >= rangeValues[maxValueId].value
-        || rangeValues[minValueId].value < 0
-        || rangeValues[maxValueId].value < 0) {
-        errors = true;
-    }
+
+    if (minValue >= maxValue || minValue < 0 || maxValue < 0) errors = true;
 
     useEffect(() => {
-        let counterValue = localStorage.getItem("CounterValue");
-        let counterMaxValue = localStorage.getItem("CounterMaxValue");
-        let counterStartValue = localStorage.getItem("CounterStartValue");
-        let changedMode = localStorage.getItem("ChangedMode");
+        let valueLocal = localStorage.getItem("currentValueLocal");
+        let maxValueLocal = localStorage.getItem("maxValueLocal");
+        let startValueLocal = localStorage.getItem("startValueLocal");
+        let changeModeLocal = localStorage.getItem("changeModeLocal");
 
-        changedMode && dispatch(changeModeValueAC(changedMode && JSON.parse(changedMode)))
-        counterMaxValue && dispatch(changeRangeValueAC(JSON.parse(counterMaxValue), maxValueId, changedMode && JSON.parse(changedMode)))
-        counterStartValue && dispatch(changeRangeValueAC(JSON.parse(counterStartValue), minValueId, changedMode && JSON.parse(changedMode)))
-        counterValue && dispatch(changeCurrentValueAC(JSON.parse(counterValue)))
+        changeModeLocal && dispatch(changeModeValueAC(changeModeLocal && JSON.parse(changeModeLocal)))
+        maxValueLocal && dispatch(changeRangeValueAC(JSON.parse(maxValueLocal), maxValueId, changeModeLocal && JSON.parse(changeModeLocal)))
+        startValueLocal && dispatch(changeRangeValueAC(JSON.parse(startValueLocal), minValueId, changeModeLocal && JSON.parse(changeModeLocal)))
+        valueLocal && dispatch(changeCurrentValueAC(JSON.parse(valueLocal)))
     }, [dispatch])
 
     useEffect(() => {
-        localStorage.setItem("CounterValue", JSON.stringify(currentValue))
-        localStorage.setItem("CounterMaxValue", JSON.stringify(rangeValues[maxValueId].value))
-        localStorage.setItem("CounterStartValue", JSON.stringify(rangeValues[minValueId].value))
-        localStorage.setItem("ChangedMode", JSON.stringify(changeMode))
-    }, [currentValue, rangeValues, changeMode])
+        localStorage.setItem("currentValueLocal", JSON.stringify(currentValue))
+        localStorage.setItem("maxValueLocal", JSON.stringify(maxValue))
+        localStorage.setItem("startValueLocal", JSON.stringify(minValue))
+        localStorage.setItem("changeModeLocal", JSON.stringify(changeMode))
+    }, [currentValue, maxValue, minValue, changeMode])
 
     const onChange = (value: ActionsType) => {
         dispatch(value)
@@ -49,14 +47,14 @@ export function Clicker() {
 
     return (
         <Grid container className={s.containerClicker}>
-            <Grid container justifyContent="space-evenly" className={s.containerBlock}>
+            <Grid container className={s.containerBlock}>
                 <Grid item xs={8} sm={5} className={s.gridItem}>
                     <TableSettings onChange={onChange} rangeValues={rangeValues} error={errors}
                                    changeMode={changeMode}/>
                 </Grid>
                 <Grid item xs={8} sm={5} className={s.gridItem}>
                     <TableClicker onChange={onChange} currentValue={currentValue} changeMode={changeMode}
-                                  minValue={rangeValues[minValueId].value} maxValue={rangeValues[maxValueId].value}
+                                  minValue={minValue} maxValue={maxValue}
                                   error={errors}/>
                 </Grid>
             </Grid>

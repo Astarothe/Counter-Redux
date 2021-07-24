@@ -36,14 +36,10 @@ type changeModeValueACType = {
     mode: boolean
 }
 
-
-
-
 export type ActionsType =
     ReturnType<typeof changeRangeValueAC>
     | ReturnType<typeof changeCurrentValueAC>
     | ReturnType<typeof changeModeValueAC>
-
 
 const initialState = {
     rangeValues: {
