@@ -1,7 +1,11 @@
 import React, {useCallback} from 'react';
 import {
-    ActionsType, changeModeValueAC, changeRangeValueAC,
-    maxValueId, minValueId, rangeValuesType
+    ActionsType,
+    changeMaxRangeValueAC, changeMaxRangeValueACType,
+    changeMinRangeValueAC,
+    changeMinRangeValueACType,
+    changeModeValueAC,
+    rangeValuesType
 } from "../../../state/clicker-reducer";
 import {Input} from "./Input/Input";
 import {Button} from "@material-ui/core";
@@ -20,21 +24,25 @@ export const TableSettings: React.FC<TableSettingsType> = React.memo(
 
         const disabledButton = !changeMode || error
 
-        const onChangeCallback = useCallback((value: number, id: string) => {
-            !isNaN(value) && onChange(changeRangeValueAC(value, id))
+        function actionHandler(action: changeMinRangeValueACType | changeMaxRangeValueACType){
+            !isNaN(action.value) && onChange(action)
             onChange(changeModeValueAC(true))
-        }, [onChange])
+        }
+        const onChangeMaxCallback = (value: number) => {
+            actionHandler(changeMaxRangeValueAC(value))
+        }
+
+        const onChangeMinCallback = (value: number) => {
+            actionHandler(changeMinRangeValueAC(value))
+        }
 
         const onChangeMode = useCallback(() => onChange(changeModeValueAC(false)), [onChange])
-
-        const inputs = [rangeValues[maxValueId], rangeValues[minValueId]].map(input => (
-            <Input key={input.id} onChange={onChangeCallback} error={error} {...input}/>
-        ))
 
         return (
             <div className={s.container}>
                 <div className={s.wrapperInputs}>
-                    {inputs}
+                    <Input onChange={onChangeMaxCallback} error={error} value={rangeValues.maxValue.value} text={rangeValues.maxValue.text}/>
+                    <Input onChange={onChangeMinCallback} error={error} value={rangeValues.minValue.value} text={rangeValues.minValue.text}/>
                 </div>
                 <div>
                     <Button variant={"contained"}

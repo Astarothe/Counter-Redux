@@ -1,19 +1,18 @@
-import {v1} from "uuid";
 
-const CHANGE_RANGE_VALUE = "CHANGE_RANGE_VALUE"
+
+const CHANGE_MIN_RANGE_VALUE = "CHANGE_MIN_RANGE_VALUE"
+const CHANGE_MAX_RANGE_VALUE = "CHANGE_MAX_RANGE_VALUE"
 const CHANGE_CURRENT_VALUE = "CHANGE_CURRENT_VALUE"
 const CHANGE_MODE = "CHANGE_MODE"
 
-export const minValueId = v1();
-export const maxValueId = v1();
 
 export type rangeValueType = {
-    id: string
     value: number
     text: string
 }
 export type rangeValuesType = {
-    [key: string]: rangeValueType,
+    minValue: rangeValueType,
+    maxValue: rangeValueType,
 }
 export type initStateType = {
     rangeValues: rangeValuesType,
@@ -21,10 +20,13 @@ export type initStateType = {
     mode: boolean
 }
 
-type changeRangeValueACType = {
-    type: "CHANGE_RANGE_VALUE"
+export type changeMinRangeValueACType = {
+    type: "CHANGE_MIN_RANGE_VALUE"
     value: number
-    id: string
+}
+export type changeMaxRangeValueACType = {
+    type: "CHANGE_MAX_RANGE_VALUE"
+    value: number
 }
 type changeCurrentValueACType = {
     type: "CHANGE_CURRENT_VALUE"
@@ -36,21 +38,21 @@ type changeModeValueACType = {
 }
 
 export type ActionsType =
-    ReturnType<typeof changeRangeValueAC>
+    ReturnType<typeof changeMinRangeValueAC>
+    | ReturnType<typeof changeMaxRangeValueAC>
     | ReturnType<typeof changeCurrentValueAC>
     | ReturnType<typeof changeModeValueAC>
 
+
 const initState = {
     rangeValues: {
-        [minValueId]: {
-            id: minValueId,
+        minValue: {
             value: 0,
-            text: "Min Value"
+            text: "Min Value",
         },
-        [maxValueId]: {
-            id: maxValueId,
+        maxValue: {
             value: 1,
-            text: "Max Value"
+            text: "Max Value",
         },
     },
     currentValue: 0,
@@ -59,13 +61,19 @@ const initState = {
 
 export const clickerReducer = (state: initStateType = initState, action: ActionsType): initStateType => {
     switch (action.type) {
-        case CHANGE_RANGE_VALUE:
+        case CHANGE_MIN_RANGE_VALUE:
             return {
                 ...state,
                 rangeValues: {
-                    ...state.rangeValues, [action.id]:
-                        {...state.rangeValues[action.id], value: action.value}
-                },
+                    ...state.rangeValues,
+                    minValue: {...state.rangeValues.minValue,value: action.value}},
+            }
+        case CHANGE_MAX_RANGE_VALUE:
+            return {
+                ...state,
+                rangeValues: {
+                    ...state.rangeValues,
+                    maxValue: {...state.rangeValues.maxValue,value: action.value}},
             }
         case CHANGE_CURRENT_VALUE:
             return {
@@ -76,14 +84,15 @@ export const clickerReducer = (state: initStateType = initState, action: Actions
             return {
                 ...state,
                 mode: action.mode,
-                currentValue: state.rangeValues[minValueId].value
+                currentValue: state.rangeValues.minValue.value
             }
         default:
             return state
     }
 }
-
-export const changeRangeValueAC = (value: number, id: string): changeRangeValueACType =>
-    ({type: CHANGE_RANGE_VALUE, value, id})
+export const changeMinRangeValueAC = (value: number): changeMinRangeValueACType =>
+    ({type: CHANGE_MIN_RANGE_VALUE, value})
+export const changeMaxRangeValueAC = (value: number): changeMaxRangeValueACType =>
+    ({type: CHANGE_MAX_RANGE_VALUE, value})
 export const changeCurrentValueAC = (value: number): changeCurrentValueACType => ({type: CHANGE_CURRENT_VALUE, value})
 export const changeModeValueAC = (mode: boolean): changeModeValueACType => ({type: CHANGE_MODE, mode})
