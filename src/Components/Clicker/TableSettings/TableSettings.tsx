@@ -26,7 +26,7 @@ export const TableSettings: React.FC<TableSettingsType> = React.memo(
 
         function actionHandler(action: changeMinRangeValueACType | changeMaxRangeValueACType){
             !isNaN(action.value) && onChange(action)
-            onChange(changeModeValueAC(true))
+            !changeMode && onChange(changeModeValueAC(true))
         }
         const onChangeMaxCallback = (value: number) => {
             actionHandler(changeMaxRangeValueAC(value))
