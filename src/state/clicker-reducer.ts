@@ -1,3 +1,4 @@
+import {v1} from "uuid";
 
 
 const CHANGE_MIN_RANGE_VALUE = "CHANGE_MIN_RANGE_VALUE"
@@ -9,6 +10,7 @@ const CHANGE_MODE = "CHANGE_MODE"
 export type rangeValueType = {
     value: number
     text: string
+    id: string
 }
 export type rangeValuesType = {
     minValue: rangeValueType,
@@ -47,16 +49,18 @@ export type ActionsType =
 const initState = {
     rangeValues: {
         minValue: {
+            id: v1(),
             value: 0,
             text: "Min Value",
         },
         maxValue: {
+            id: v1(),
             value: 1,
             text: "Max Value",
         },
     },
     currentValue: 0,
-    mode: false
+    mode: false,
 }
 
 export const clickerReducer = (state: initStateType = initState, action: ActionsType): initStateType => {
