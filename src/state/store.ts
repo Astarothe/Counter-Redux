@@ -1,16 +1,26 @@
 import {combineReducers, createStore} from "redux";
-import {clickerReducer} from "./clicker-reducer";
+import {counterReducer} from "./clicker-reducer";
 import {loadState, saveState} from "../utils/localStorage-utils";
+import {modeReducer} from "./mode-reducer";
+import {countReducer} from "./count-reducer";
+import {errorReducer} from "./errors-reducer";
+
 
 const rootReducer = combineReducers({
-    counter: clickerReducer
+    error: errorReducer,
+    counter: counterReducer,
+    mode: modeReducer,
+    countValue: countReducer,
 })
 
 export const store = createStore(rootReducer, loadState())
 
 store.subscribe(() => {
     saveState({
-        counter: store.getState().counter
+        error: store.getState().error,
+        counter: store.getState().counter,
+        mode: store.getState().mode,
+        countValue: store.getState().countValue,
     })
 })
 export type StoreType = ReturnType<typeof rootReducer>

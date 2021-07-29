@@ -1,7 +1,7 @@
 import {
     changeCurrentValueAC,
     changeRangeValueAC,
-    clickerReducer,
+    counterReducer,
     initStateType, maxValueId, minValueId
 } from "./clicker-reducer";
 
@@ -24,7 +24,7 @@ beforeEach(() => {
 })
 
 test("correct max value should be changed", () => {
-    const endState = clickerReducer(startState, changeRangeValueAC(5, maxValueId, true))
+    const endState = counterReducer(startState, changeRangeValueAC(5, maxValueId, true))
 
     expect(endState.rangeValues.minValue.value).toBe(0)
     expect(endState.rangeValues.maxValue.value).toBe(5)
@@ -34,7 +34,7 @@ test("correct max value should be changed", () => {
 })
 
 test("correct min value should be changed", () => {
-    const endState = clickerReducer(startState, changeRangeValueAC(3, minValueId, true))
+    const endState = counterReducer(startState, changeRangeValueAC(3, minValueId, true))
 
     expect(endState.rangeValues.minValue.value).toBe(3)
     expect(endState.rangeValues.maxValue.value).toBe(4)
@@ -43,7 +43,7 @@ test("correct min value should be changed", () => {
 })
 
 test("correct current value should be changed", () => {
-    const endState = clickerReducer(startState, changeCurrentValueAC(1))
+    const endState = counterReducer(startState, changeCurrentValueAC(1))
 
     expect(endState.rangeValues.minValue.value).toBe(0)
     expect(endState.rangeValues.maxValue.value).toBe(4)

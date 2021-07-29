@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import {Clicker} from "./Components/Clicker/Clicker";
+import {Counter} from "./Components/Counter/Counter";
 
 export function App() {
   return (
     <div className="App">
-      <Clicker />
+      <Counter />
     </div>
   );
 }
