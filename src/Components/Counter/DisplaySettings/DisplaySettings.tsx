@@ -50,6 +50,7 @@ export const DisplaySettings: React.FC = React.memo(() => {
                         onClick={onChangeMode}>set
                     <SettingsIcon/>
                 </Button>
+
             </div>
         </div>
     );
