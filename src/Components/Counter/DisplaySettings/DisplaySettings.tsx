@@ -35,6 +35,8 @@ export const DisplaySettings: React.FC = React.memo(() => {
         dispatch(changeErrorStatus(result))
     }, [dispatch, result])
 
+
+
     const onChangeMode = useCallback(() =>
         dispatch(changeModeValueAC(false)), [dispatch])
 
