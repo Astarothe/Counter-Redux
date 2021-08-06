@@ -36,9 +36,9 @@ export const DisplaySettings: React.FC = React.memo(() => {
     }, [dispatch, result])
 
 
-
     const onChangeMode = useCallback(() =>
         dispatch(changeModeValueAC(false)), [dispatch])
+
 
     return (
         <div className={s.container}>
