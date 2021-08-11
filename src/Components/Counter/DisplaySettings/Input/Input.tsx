@@ -14,9 +14,10 @@ export const Input: React.FC<InputType> = React.memo((props) => {
 
     const dispatch = useDispatch()
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         !isNaN(e.currentTarget.valueAsNumber) &&
         dispatch(changeRangeValueAC(e.currentTarget.valueAsNumber, id))
+    }
 
     const error = useSelector<StoreType, boolean>
     (state => state.error.errorRangeValues)
