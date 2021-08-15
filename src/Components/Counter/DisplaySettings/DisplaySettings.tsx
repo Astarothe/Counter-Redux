@@ -39,6 +39,7 @@ export const DisplaySettings: React.FC = React.memo(() => {
     const onChangeMode = useCallback(() =>
         dispatch(changeModeValueAC(false)), [dispatch])
 
+
     return (
         <div className={s.container}>
             <div className={s.wrapperInputs}>
